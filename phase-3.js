@@ -37,10 +37,15 @@ function liftWeights(time) {
 	});
 }
 
-function workout(time) {
-	Promise.all([stretch(), runOnTreadmill(), liftWeights()]).then(() =>
-		console.log("Done Working out")
-	);
+async function workout() {
+	try {
+		await stretch();
+		await runOnTreadmill();
+		await liftWeights();
+		console.log("Done working out");
+	} catch (error) {
+		console.log("Keep working out");
+	}
 }
 
 /* ============================ TEST YOUR CODE ============================
@@ -49,7 +54,7 @@ Run the file (`node phase-1.js`) and check your output against the expected
 output.
 */
 
-workout(1000);
+workout();
 // should print out the following:
 // done stretching
 // done running on treadmill
